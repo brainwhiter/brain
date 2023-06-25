@@ -1,0 +1,18 @@
+tx_week = {}
+    tx_month = {}
+    for tx_time in tx_times:
+        date_obj = datetime.fromisoformat(tx_time)
+        year, week_num, day_num = date_obj.isocalendar()
+        month_calendar = calendar.monthcalendar(year, date_obj.month)
+        month = f"{year}-{month_calendar}"
+        week = f"{year}-{week_num}"
+        if month not in tx_week.keys():
+            tx_month.update({month: 1})
+        else:
+            tx_month[month] = tx_month[month] + 1
+        if week not in tx_week.keys():
+            tx_week.update({week: 1})
+        else:
+            tx_week[week] = tx_week[week] + 1
+    data = [len(tx_month), len(tx_week), deposit, days_since_last_occurrence, days_since_first_occurrence]
+    return data
